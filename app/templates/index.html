@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% include 'includes/css.html' %}
+        <title>Clinic App</title>
+    </head>
+    <body class="has-sidebar has-fixed-sidebar-and-header">
+        {% block content %}{% endblock content %}
+        {% include 'includes/js.html' %}
+    </body>
+</html>

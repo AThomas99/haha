@@ -1,0 +1,69 @@
+{% load static %}
+
+<script src="{% static 'assets/lib/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/app.js' %}"></script>
+<script src="{% static 'assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/lib/jquery.niftymodals/js/jquery.niftymodals.js' %}"></script>
+<script src="{% static 'assets/lib/parsley/parsley.min.js' %}"></script>
+
+<script type="text/javascript">
+    //-Set Nifty Modals defaults
+    $.fn.niftyModal('setDefaults',{
+    overlaySelector: '.modal-overlay',
+    contentSelector: '.modal-content',
+    closeSelector: '.modal-close',
+    classAddAfterOpen: 'modal-show',
+    classModalOpen: 'modal-open',
+    classScrollbarMeasure: 'modal-scrollbar-measure',
+    afterOpen: function(){
+        $("html").addClass('mai-modal-open');
+    },
+    afterClose: function(){
+        $("html").removeClass('mai-modal-open');
+    }
+    });
+    
+    $(document).ready(function(){
+    //-initialize the javascript
+    App.init();
+    $('form').parsley();
+    });
+
+    const roomName = JSON.parse(document.getElementById('user-id').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/task/'
+            + roomName
+            + '/'
+        );
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data)
+            //document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+        chatSocket.onopen = function(e) {
+            console.log("connected")
+        }
+</script>
+
+
+{% comment %}
+<script src="{% static 'assets/lib/fuelux/js/wizard.js' %}"></script>
+<script src="{% static 'assets/lib/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'assets/lib/select2/js/select2.full.min.js' %}"></script>
+<script src="{% static 'assets/lib/theme-switcher/theme-switcher.min.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/jquery.flot.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/jquery.flot.pie.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/jquery.flot.time.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/plugins/jquery.flot.orderBars.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/plugins/curvedLines.js' %}"></script>
+<script src="{% static 'assets/lib/jquery-flot/plugins/jquery.flot.tooltip.js' %}"></script>
+<script src="{% static 'assets/lib/countup/countUp.min.js' %}"></script>
+{% endcomment %}

@@ -127,7 +127,14 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'app.Account'
 
+AUTHENTICATION_BACKENDS = (
+    'app.backends.AccountAuth',
+    #'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'

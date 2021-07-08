@@ -1,0 +1,41 @@
+{% load static %}
+
+{% for reception in reception %}
+    {% if reception.is_active %}<tr>{% else %}<tr class="table-dark">{% endif %}
+        <td>
+            <label class="custom-control custom-control-sm custom-checkbox">
+                <input class="custom-control-input" type="checkbox">
+                <span class="custom-control-label"></span>
+            </label>
+        </td>
+        <td class="user-avatar cell-detail user-info">
+            <img src="media/{{ reception.profile_picture }}" alt="Avatar">
+            <span>{{ reception.first_name }} {{ reception.last_name }}</span>
+            <span class="cell-detail-description">Reception</span>
+        </td>
+        <td class="cell-detail">
+            <span>{{ reception.phone_number }}</span>
+            <span class="cell-detail-description">{{ reception.email }}</span>
+        </td>
+        <td class="cell-detail">
+            <span> {{ reception.date_joined.date }} </span>
+            <span class="cell-detail-description"> {{ reception.date_joined.time }} </span>
+        </td>
+        <td class="text-right">
+            <div class="btn-group dropup btn-hspace">
+                <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span>More</span>
+                    <span class="icon-dropdown s7-angle-down"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <a class="dropdown-item" href="{% url 'reception_profile' reception.id %}">Manage</a>
+                    {% if reception.is_active %}
+                        <a class="dropdown-item" href="{% url 'disable_user' reception.id %}">Deactivate</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'enable_user' reception.id %}">Activate</a>
+                    {% endif %}
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endfor %}

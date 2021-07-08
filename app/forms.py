@@ -3,27 +3,29 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.db.models import fields
 from .models import *
 
-RECEPTIONIST = 'RECEPTIONIST'
-NURSE = 'NURSE'
-LAB_TECHNICIAN = 'LAB_TECHNICIAN'
+# RECEPTIONIST = 'RECEPTIONIST'
+# NURSE = 'NURSE'
+# DOCTOR = 'DOCTOR'
+# LAB_TECHNICIAN = 'LAB_TECHNICIAN'
 
 
-STATUS = [
-    (RECEPTIONIST, "Receptionist"),
-    (NURSE, "Nurse"),
-    (LAB_TECHNICIAN, 'Lab technician')
-]
+# STATUS = [
+#     (RECEPTIONIST, "Receptionist"),
+#     (NURSE, "Nurse"),
+#     (DOCTOR, "Doctor"),
+#     (LAB_TECHNICIAN, 'Lab technician')
+# ]
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Confirm password', widget=forms.PasswordInput)
-    userRole = forms.ChoiceField(required=True, choices=STATUS)
+    # userRole = forms.ChoiceField(required=True, choices=STATUS)
 
     class Meta:
         model = Account
         fields = (
-            'email', 'phone_number', 'first_name', 'last_name', 'userRole'
+            'first_name', 'last_name','email', 'phone_number'
         )
 
     def clean_email(self):
@@ -150,7 +152,7 @@ class PatientEmergencyForm(forms.ModelForm):
             'patient_family_number',
             )
 
-class PatientVitals(forms.ModelForm):
+class PatientVitalsForm(forms.ModelForm):
 
     class Meta:
         model = PatientVitals
@@ -165,6 +167,11 @@ class PatientVitals(forms.ModelForm):
 
 # Appointment forms
 class AppointmentForm(forms.ModelForm):
+    APPOINTMENT_STATUS = (
+        ('unassigned', 'unassigned'),
+        ('assigned', 'assigned'),
+    )
+
     APPOINTMENT_TIME = [
         ('09:00 AM', '09:00 AM'),
         ('09:40 AM', '09:40 AM'),
@@ -179,7 +186,7 @@ class AppointmentForm(forms.ModelForm):
         ('14:00 AM', '14:00 AM'),
         ]
     appointment_time = forms.CharField(label='Appointment Time', widget=forms.RadioSelect(choices=APPOINTMENT_TIME))
-
+    appointment_status = forms.ChoiceField(required=True, choices=APPOINTMENT_STATUS)
     class Meta:
         model = Appointment
         fields = (
@@ -197,5 +204,5 @@ class PrescriptionForm(forms.ModelForm):
         fields = (
             'patient_description',
             'patient_instruction',
-            'presciption_date',
+            
         )

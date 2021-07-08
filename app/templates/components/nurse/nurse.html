@@ -1,0 +1,41 @@
+{% load static %}
+
+{% for nurse in nurse %}
+    {% if nurse.is_active %}<tr>{% else %}<tr class="table-dark">{% endif %}
+        <td>
+            <label class="custom-control custom-control-sm custom-checkbox">
+                <input class="custom-control-input" type="checkbox">
+                <span class="custom-control-label"></span>
+            </label>
+        </td>
+        <td class="user-avatar cell-detail user-info">
+            <img src="../media/{{ nurse.profile_picture }}" alt="Avatar">
+            <span>{{ nurse.first_name }} {{ nurse.last_name }}</span>
+            <span class="cell-detail-description">Nurse</span>
+        </td>
+        <td class="cell-detail">
+            <span>{{ nurse.phone_number }}</span>
+            <span class="cell-detail-description">{{ nurse.email }}</span>
+        </td>
+        <td class="cell-detail">
+            <span> {{ nurse.date_joined.date }} </span>
+            <span class="cell-detail-description"> {{ nurse.date_joined.time }} </span>
+        </td>
+        <td class="text-right">
+            <div class="btn-group dropup btn-hspace">
+                <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span>More</span>
+                    <span class="icon-dropdown s7-angle-down"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <a class="dropdown-item" href="{% url 'nurse_profile' nurse.id %}">Manage</a>
+                    {% if nurse.is_active %}
+                        <a class="dropdown-item" href="{% url 'disable_user' nurse.id %}">Deactivate</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'enable_user' nurse.id %}">Activate</a>
+                    {% endif %}
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endfor %}

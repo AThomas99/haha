@@ -1,0 +1,35 @@
+{% load static %}
+
+{% comment %}
+{% url 'staff_profile' request.user.id %}
+{% endcomment %}
+
+<nav class="navbar navbar-expand navbar-dark mai-top-header">
+    <div class="container">
+        <a class="navbar-brandx" href="#"></a>
+        <ul class="nav navbar-nav mai-top-nav"></ul>
+        
+        <ul class="nav navbar-nav float-lg-right mai-user-nav">
+            <li class="dropdown nav-item">
+                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <img src="/media/{{request.user.profile_picture}}" alt="Avatar">
+                    <span class="user-name">{{ request.user.first_name }} {{ request.user.last_name }} </span>
+                    <span id="user-id" style="display: none;"> {{request.user.id}} </span>
+                    <span class="angle-down s7-angle-down"></span>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                    {% if request.user.is_staff %}
+                        <a class="dropdown-item" href="">
+                            <span class="icon s7-home"></span>
+                            My Account
+                        </a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{% url 'logout_user' %}">
+                        <span class="icon s7-power"></span>
+                        Log Out
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

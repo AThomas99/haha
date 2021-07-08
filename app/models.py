@@ -61,6 +61,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     last_name       = models.CharField(max_length=30)
     date_joined     = models.DateTimeField(default=timezone.now)
     phone_number    = models.CharField(unique=True, max_length=15)
+    profile_picture = models.ImageField(upload_to='users/%Y/%m/%d',default='default/user.png',blank=True)
 
     # User roles
     is_active       = models.BooleanField(default=True)
@@ -79,6 +80,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['first_name', 'last_name',]
 
     users = AccountManager()
+    objects = AccountManager()
 
     def __str__(self):
         return self.get_full_name()
@@ -89,7 +91,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='users/%Y/%m/%d',default='default/user.png',blank=True)
 
     users = models.Manager()
 
@@ -103,6 +104,7 @@ class Reception(models.Model):
     joined_at = models.DateField(auto_now=True)
 
     reception = models.Manager()
+    objects = AccountManager()
 
     class Meta:
         verbose_name = "Reception"
@@ -120,6 +122,7 @@ class Nurse(models.Model):
     joined_at = models.DateField(auto_now=True)
 
     nurse = models.Manager()
+    objects = AccountManager()
 
     class Meta:
         verbose_name = "Nurse"
@@ -183,7 +186,6 @@ class Patient(models.Model):
 
     PATIENT_STATUS = (
         ('Registered' , 'Registered'),
-        ('Treatment' , 'Treatment'),
         ('Admitted' , 'Admitted'),
         ('Discharged' , 'Discharged'),
         ('Outpatient' , 'Outpatient'),
@@ -203,7 +205,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     registered = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    patient_status = models.CharField(max_length=250, choices=PATIENT_STATUS, blank=False, null=False)
+    patient_status = models.CharField(max_length=250, default="Registered" ,choices=PATIENT_STATUS, blank=False, null=False)
 
 
     class Meta:
@@ -211,6 +213,7 @@ class Patient(models.Model):
         verbose_name_plural = "Patients"
 
     patient = models.Manager()
+    objects = AccountManager()
 
 
     def __str__(self):
@@ -219,10 +222,17 @@ class Patient(models.Model):
 # Patient Emergency model
 class PatientEmergency(models.Model):
     
-    patient = models.OneToOneField(on_delete=models.SET_NULL, null=True, blank=True)
+    patient = models.OneToOneField(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     patient_relation = models.CharField(max_length=250, null=True, blank=True)
     patient_family_name = models.CharField(max_length=250, null=True, blank=True)
     patient_family_number = models.CharField(unique=True, max_length=15)
+
+    class Meta:
+        verbose_name = "Patient Emergiency"
+        verbose_name_plural = "Patient Emergencies"
+
+    def __str__(self):
+        return f"{self.patient.first_name} {self.patient.last_name}"
 
 # Patient vitals model
 class PatientVitals(models.Model):
@@ -266,12 +276,24 @@ class Appointment(models.Model):
         ('13:40 AM', '13:40 AM'),
         ('14:00 AM', '14:00 AM'),
     )
+    APPOINTMENT_STATUS = (
+        ('unassigned', 'unassigned'),
+        ('assigned', 'assigned'),
+    )
     patient_requested = models.OneToOneField(Patient, related_name='patient_appointment', null=True, blank=True, on_delete=models.SET_NULL)
     doctor_assigned = models.ForeignKey(Doctor, related_name='doctor_assigned', null=True, blank=True, on_delete=models.SET_NULL)
     phone_number = models.CharField(unique=True, max_length=15, null=False, blank=False)
     appointment_time = models.CharField(choices=APPOINTMENT_TIME, max_length=8)
     created_on = models.DateTimeField(default=timezone.now, blank=True)
+    appointment_status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS, default='unassigned')
     note = RichTextField()
+
+    class Meta:
+        verbose_name = "Appointment"
+        verbose_name_plural = "Appointments"
+
+    def __str__(self):
+        return f"{self.patient_requested.first_name} {self.patient_requested.last_name}"
 
 # Prescription model
 class Presciption(models.Model):
@@ -280,3 +302,10 @@ class Presciption(models.Model):
     patient_description = RichTextField()
     patient_instruction = models.CharField(max_length=250) # Gives the patient instructions on how to take the medication
     presciption_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Prescription"
+        verbose_name_plural = "Prescriptions"
+
+    def __str__(self):
+        return f"{self.patient.first_name} {self.patient.last_name}"

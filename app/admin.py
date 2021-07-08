@@ -10,7 +10,7 @@ class UserAdmin(BaseUserAdmin):
     add_form = UserAdminCreationForm
     exclude = ['last_login', 'groups',]
     list_display = [
-        'first_name', 'last_name', 'phone_number', 'is_reception',
+        'first_name', 'last_name', 'phone_number','is_staff', 'is_superuser', 'is_active', 'is_reception',
         'is_nurse', 'is_doctor', 'is_technician'
     ]
     list_filter = ('last_login', )
@@ -45,22 +45,22 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Reception)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'speciality',)
+    list_display = ('first_name', 'last_name',)
     list_filter = ('joined_at',)
 
 @admin.register(Nurse)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'speciality',)
+    list_display = ('first_name', 'last_name', )
     list_filter = ('joined_at',)
 
 @admin.register(Doctor)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'speciality',)
+    list_display = ('first_name', 'last_name', 'speciality',)
     list_filter = ('joined_at',)
 
 @admin.register(LabTechnician)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email')
+    list_display = ('first_name', 'last_name',)
     list_filter = ('joined_at',)
 
 @admin.register(Patient)
