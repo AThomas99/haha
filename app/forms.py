@@ -3,18 +3,18 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.db.models import fields
 from .models import *
 
-# RECEPTIONIST = 'RECEPTIONIST'
-# NURSE = 'NURSE'
-# DOCTOR = 'DOCTOR'
-# LAB_TECHNICIAN = 'LAB_TECHNICIAN'
+Registered = 'Registered'
+Admitted = 'Admitted'
+Discharged = 'Discharged'
+Outpatient = 'Outpatient'
 
 
-# STATUS = [
-#     (RECEPTIONIST, "Receptionist"),
-#     (NURSE, "Nurse"),
-#     (DOCTOR, "Doctor"),
-#     (LAB_TECHNICIAN, 'Lab technician')
-# ]
+PATIENT_STATUS = [
+    (Registered, "Registered"),
+    (Admitted, "Admitted"),
+    (Discharged, "Discharged"),
+    (Outpatient, 'Outpatient')
+]
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
@@ -127,21 +127,34 @@ class Newpassword(forms.ModelForm):
 
 
 # Patient forms
+# class PatientForm(forms.ModelForm):
+#     CHOICES = [('M','Male'),('F','Female')]
+#     gender  = forms.CharField(label='Gender', widget=forms.RadioSelect(choices=CHOICES))
+#     patient_status = forms.ChoiceField(choices=PATIENT_STATUS)
+#     class Meta:
+#         model = Patient
+#         fields = (
+#             'first_name',
+#             'last_name',
+#             'gender',
+#             'age',
+#             'phone_number',
+#             'doctor',
+#             'patient_status',
+#             )
+
 class PatientForm(forms.ModelForm):
-    CHOICES = [('M','Male'),('F','Female')]
-    gender  = forms.CharField(label='Gender', widget=forms.RadioSelect(choices=CHOICES))
-    
     class Meta:
-        model = Patient
+        model = Patient 
         fields = (
             'first_name',
             'last_name',
             'gender',
             'age',
             'phone_number',
-            'address',
+            'doctor',
             'patient_status',
-            )
+        )
 
 class PatientEmergencyForm(forms.ModelForm):
     class Meta:

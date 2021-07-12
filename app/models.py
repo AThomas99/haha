@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
 from time import strftime, gmtime
+from django.db.models.base import Model
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 
@@ -95,93 +96,92 @@ class UserProfile(models.Model):
     users = models.Manager()
 
 # Reception Model
-class Reception(models.Model):
+# class Reception(models.Model):
 
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    joined_at = models.DateField(auto_now=True)
+#     user = models.OneToOneField(Account, on_delete=models.CASCADE)
+#     first_name = models.CharField(max_length=255)
+#     last_name = models.CharField(max_length=255)
+#     address = models.CharField(max_length=255)
+#     joined_at = models.DateField(auto_now=True)
 
-    reception = models.Manager()
-    objects = AccountManager()
+#     reception = models.Manager()
+#     objects = AccountManager()
 
-    class Meta:
-        verbose_name = "Reception"
-        verbose_name_plural = "Reception"
+#     class Meta:
+#         verbose_name = "Reception"
+#         verbose_name_plural = "Reception"
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-# Nurse Model
-class Nurse(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    joined_at = models.DateField(auto_now=True)
+# # Nurse Model
+# class Nurse(models.Model):
+#     user = models.OneToOneField(Account, on_delete=models.CASCADE)
+#     first_name = models.CharField(max_length=255)
+#     last_name = models.CharField(max_length=255)
+#     address = models.CharField(max_length=255)
+#     joined_at = models.DateField(auto_now=True)
 
-    nurse = models.Manager()
-    objects = AccountManager()
+#     nurse = models.Manager()
+#     objects = AccountManager()
 
-    class Meta:
-        verbose_name = "Nurse"
-        verbose_name_plural = "Nurse"
+#     class Meta:
+#         verbose_name = "Nurse"
+#         verbose_name_plural = "Nurse"
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-# Laboratory Technician model
-class LabTechnician(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    joined_at = models.DateField(auto_now=True)
+# # Laboratory Technician model
+# class LabTechnician(models.Model):
+#     user = models.OneToOneField(Account, on_delete=models.CASCADE)
+#     first_name = models.CharField(max_length=255)
+#     last_name = models.CharField(max_length=255)
+#     address = models.CharField(max_length=255)
+#     joined_at = models.DateField(auto_now=True)
 
-    lab_technician = models.Manager()
+#     lab_technician = models.Manager()
 
-    class Meta:
-        verbose_name = "Lab Technician"
-        verbose_name_plural = "Lab Technicians"
+#     class Meta:
+#         verbose_name = "Lab Technician"
+#         verbose_name_plural = "Lab Technicians"
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-# Doctor model
-class Doctor(models.Model):
-    SPECIALITIES = (
-        ('Pediatrician' , 'Pediatrician'),
-        ('Gynecologist' , 'Gynecologist'),
-        ('Cardiologist' , 'Cardiologist'),
-        ('Surgeon' , 'Surgeon'), 
-        ('Ophthalmologist' , 'Ophthalmologist'), # Eye
-        ('Dermatologist' , 'Dermatologist'), # A dermatologist is a medical doctor who specializes in treating skin, hair, and nails.
-    )
+# # Doctor model
+# class Doctor(models.Model):
+#     SPECIALITIES = (
+#         ('Pediatrician' , 'Pediatrician'),
+#         ('Gynecologist' , 'Gynecologist'),
+#         ('Cardiologist' , 'Cardiologist'),
+#         ('Surgeon' , 'Surgeon'), 
+#         ('Ophthalmologist' , 'Ophthalmologist'), # Eye
+#         ('Dermatologist' , 'Dermatologist'), # A dermatologist is a medical doctor who specializes in treating skin, hair, and nails.
+#     )
 
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=250, blank=True, null=True)
-    last_name = models.CharField(max_length=250, blank=True, null=True)
-    telno = models.CharField(max_length=13, blank=True, null=True)
-    address = models.CharField(max_length=200, blank=True, null=True)
-    speciality = models.CharField( max_length=200, choices=SPECIALITIES, blank=True, null=True)
-    description = RichTextField()
-    joined_at = models.DateField(auto_now=True)
+#     user = models.OneToOneField(Account, on_delete=models.CASCADE)
+#     first_name = models.CharField(max_length=250, blank=True, null=True)
+#     last_name = models.CharField(max_length=250, blank=True, null=True)
+#     telno = models.CharField(max_length=13, blank=True, null=True)
+#     speciality = models.CharField( max_length=200, choices=SPECIALITIES, blank=True, null=True)
+#     description = RichTextField()
+#     joined_at = models.DateField(auto_now=True)
 
-    class Meta:
-        verbose_name = "Doctor"
-        verbose_name_plural = "Doctors"
+#     class Meta:
+#         verbose_name = "Doctor"
+#         verbose_name_plural = "Doctors"
     
-    doctor = models.Manager()
+#     doctor = models.Manager()
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+#     def __str__(self):
+#         return f"{self.first_name} {self.last_name}"
 
 # Patient model
 class Patient(models.Model):
     GENDER = (
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     )
 
     PATIENT_STATUS = (
@@ -192,14 +192,14 @@ class Patient(models.Model):
     )
 
     # Staff Members
-    doctor = models.ForeignKey(Doctor, related_name='doctor_patient',  null=True, blank=True, on_delete=models.SET_NULL)
-    lab_technician = models.ForeignKey(LabTechnician, related_name= 'patient_lab',null=True, blank=True, on_delete=models.SET_NULL)
+    doctor = models.ForeignKey(Account, related_name='doctor_patient',  null=True, blank=True, on_delete=models.SET_NULL)
+    lab_technician = models.ForeignKey(Account, related_name= 'patient_lab',null=True, blank=True, on_delete=models.SET_NULL)
     # doctor = models.ForeignKey(Reception,  null=True, blank=True, on_delete=models.SET_NULL)
 
     first_name = models.CharField(max_length=50, blank=False, null=False)
     last_name = models.CharField(max_length=50, blank=False, null=False)
     phone_number   = models.CharField(unique=True, max_length=15)
-    gender = models.CharField(max_length=1, choices=GENDER, blank=False, null=False)
+    gender = models.CharField(max_length=10, choices=GENDER, blank=False, null=False)
     birth_date = models.DateField(auto_now=False, auto_now_add=False)
     age = models.IntegerField(null=False, blank=False)
     address = models.CharField(max_length=200, blank=True, null=True)
@@ -281,7 +281,7 @@ class Appointment(models.Model):
         ('assigned', 'assigned'),
     )
     patient_requested = models.OneToOneField(Patient, related_name='patient_appointment', null=True, blank=True, on_delete=models.SET_NULL)
-    doctor_assigned = models.ForeignKey(Doctor, related_name='doctor_assigned', null=True, blank=True, on_delete=models.SET_NULL)
+    doctor_assigned = models.ForeignKey(Account, related_name='doctor_assigned', null=True, blank=True, on_delete=models.SET_NULL)
     phone_number = models.CharField(unique=True, max_length=15, null=False, blank=False)
     appointment_time = models.CharField(choices=APPOINTMENT_TIME, max_length=8)
     created_on = models.DateTimeField(default=timezone.now, blank=True)
@@ -297,7 +297,7 @@ class Appointment(models.Model):
 
 # Prescription model
 class Presciption(models.Model):
-    doctor = models.ForeignKey(Doctor, related_name='doctor_prescription', null=True, blank=True, on_delete=models.SET_NULL)
+    doctor = models.ForeignKey(Account, related_name='doctor_prescription', null=True, blank=True, on_delete=models.SET_NULL)
     patient = models.OneToOneField(Patient,related_name='patient_prescription', on_delete=models.CASCADE)
     patient_description = RichTextField()
     patient_instruction = models.CharField(max_length=250) # Gives the patient instructions on how to take the medication
@@ -309,3 +309,12 @@ class Presciption(models.Model):
 
     def __str__(self):
         return f"{self.patient.first_name} {self.patient.last_name}"
+
+class ClinicProgram(models.Model):
+    program_name = models.CharField(max_length=50, blank=False, null=False)
+    program_description = RichTextField()
+    program_date_creation = models.DateTimeField(auto_now=True)
+    program_duration = models.TimeField(auto_now=False, auto_now_add=False)
+    doctor_available = models.ForeignKey(Account, related_name='doctor_clinic_program', null=True, blank=True, on_delete=models.SET_NULL)
+
+    # Create form and link on clinical services

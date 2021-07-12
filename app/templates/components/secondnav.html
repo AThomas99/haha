@@ -30,18 +30,13 @@
                     </a>
                   </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="">
-                    {% comment %}
-                      {% url 'doctor_list' %}
-                    {% endcomment %}
+                  <a class="nav-link {% if doctor or doctor %}active{% endif %}" href="{% url 'doctor' %}">
                     </span><span class="name">Doctors</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="">
-                    {% comment %}
-                      {% url 'technician_list' %}
-                    {% endcomment %}
+                  <a class="nav-link {% if technician or technician %}active{% endif %}" href="{% url 'technician' %}">
+                      
                     </span><span class="name">Laboratory Technicians</span>
                   </a>
                 </li>
@@ -55,17 +50,10 @@
               </a>
               <ul class="mai-nav-tabs-sub mai-sub-nav nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span class="name">Appointments</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span class="name"> Prescriptions</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="">
+                    {% comment %}
+                      {% url 'clinic_programs' %}
+                    {% endcomment %}
                     <span class="name"> Clinical Programs</span>
                   </a>
                 </li>
@@ -80,17 +68,12 @@
               <ul class="mai-nav-tabs-sub mai-sub-nav nav">
                 <li class="nav-item">
                   <a class="nav-link" href="#">
-                    <span class="name">Appointments</span>
+                    <span class="name">Product Management</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">
-                    <span class="name"> Prescriptions</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span class="name"> Clinical Programs</span>
+                    <span class="name"> Order Management</span>
                   </a>
                 </li>
               </ul>
@@ -156,6 +139,7 @@
               </ul>
           </li>
           {% endif %}
+
           {% if request.user.is_doctor %}
             <li class="nav-item parent">
               <a class="nav-link" href="#" role="button" aria-expanded="false">
@@ -193,6 +177,20 @@
                   </li>
                 </ul>
             </li>
+          {% endif %}
+          {% if request.user.is_technician %}
+          <li class="nav-item parent">
+            <a class="nav-link" href="#" role="button" aria-expanded="false">
+              <span class="icon s7-portfolio"></span>
+              <span>Patients Experiment</span></a>
+              <ul class="mai-nav-tabs-sub mai-sub-nav nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="">
+                    <span class="name">Laboratory</span>
+                  </a>
+                </li>
+              </ul>
+          </li>
           {% endif %}
         </ul>
       </div>

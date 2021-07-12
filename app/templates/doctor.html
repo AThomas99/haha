@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+    {% include 'components/navbar.html' %}
+    <div class="mai-wrapper">
+        {% include 'components/secondnav.html' %}
+        {% if user.is_superuser %}
+            {% if profile_page %}
+                {% include 'components/doctor/doctor_profile.html' %}
+            {% else %}
+            {% include 'components/doctor/doctor_list.html' %}
+            {% endif %}
+        {% endif %}
+        
+    </div>
+{% endblock %}

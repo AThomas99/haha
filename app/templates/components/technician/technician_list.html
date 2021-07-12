@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-default card-table">
-                <div class="card-header">Reception Management
+                <div class="card-header">Lab Technician Management
                     <div class="tools">
                         <button class="btn btn-sm btn-space btn-primary md-trigger" data-modal="nft-default">
-                            <i class="icon icon-left s7-add-user text-white mr-2"></i> Add Reception
+                            <i class="icon icon-left s7-add-user text-white mr-2"></i> Add Technician
                         </button>
-                        {% comment %} Add fundi modal {% endcomment %}
-                            {% include 'components/reception/add_reception.html' %}
+                        {% comment %} Add user modal {% endcomment %}
+                            {% include 'components/technician/add_technician.html' %}
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,13 +25,14 @@
                                 </th>
                                 <th style="width:20%;">User</th>
                                 <th style="width:20%;">Contacts</th>
+                                <!-- <th style="width:20%;">Speciality</th> -->
                                 <th style="width:20%;">Date Created</th>
                                 <th style="width:15%;"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                            {% include 'components/reception/reception.html' %}
+                            {% comment %} Single user component {% endcomment %}
+                            {% include 'components/technician/technician.html' %}
                         </tbody>
                     </table>
                 </div>

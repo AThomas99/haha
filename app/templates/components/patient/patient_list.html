@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-default card-table">
-                <div class="card-header">Reception Management
+                <div class="card-header">Patient Management
                     <div class="tools">
                         <button class="btn btn-sm btn-space btn-primary md-trigger" data-modal="nft-default">
-                            <i class="icon icon-left s7-add-user text-white mr-2"></i> Add Reception
+                            <i class="icon icon-left s7-add-user text-white mr-2"></i> Add Patient
                         </button>
-                        {% comment %} Add fundi modal {% endcomment %}
-                            {% include 'components/reception/add_reception.html' %}
+                        {% comment %} Add user modal {% endcomment %}
+                            {% include 'components/patient/add_patient.html' %}
                     </div>
                 </div>
                 <div class="card-body">
@@ -23,15 +23,16 @@
                                             class="custom-control-label"></span>
                                     </label>
                                 </th>
-                                <th style="width:20%;">User</th>
-                                <th style="width:20%;">Contacts</th>
-                                <th style="width:20%;">Date Created</th>
-                                <th style="width:15%;"></th>
+                                <th style="width:15%;">User</th>
+                                <th style="width:15%;">Contacts</th>
+                                <th style="width:15%;">Personal Info</th>
+                                <th style="width:15%;">Doctor assigned</th>
+                                <th style="width:15%;">Date Created</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                            {% include 'components/reception/reception.html' %}
+                            {% comment %} Single user component {% endcomment %}
+                            {% include 'components/patient/patient.html' %}
                         </tbody>
                     </table>
                 </div>

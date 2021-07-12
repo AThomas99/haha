@@ -43,25 +43,25 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', )
     list_filter = ('user',)
 
-@admin.register(Reception)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name',)
-    list_filter = ('joined_at',)
+# @admin.register(Reception)
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = ('first_name', 'last_name',)
+#     list_filter = ('joined_at',)
 
-@admin.register(Nurse)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', )
-    list_filter = ('joined_at',)
+# @admin.register(Nurse)
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = ('first_name', 'last_name', )
+#     list_filter = ('joined_at',)
 
-@admin.register(Doctor)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'speciality',)
-    list_filter = ('joined_at',)
+# @admin.register(Doctor)
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = ('first_name', 'last_name', 'speciality',)
+#     list_filter = ('joined_at',)
 
-@admin.register(LabTechnician)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name',)
-    list_filter = ('joined_at',)
+# @admin.register(LabTechnician)
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = ('first_name', 'last_name',)
+#     list_filter = ('joined_at',)
 
 @admin.register(Patient)
 class ProfileAdmin(admin.ModelAdmin):

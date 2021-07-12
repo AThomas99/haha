@@ -1,0 +1,144 @@
+{% load static %}
+
+<div class="modal-container modal-effect-1" id="nft-default">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button
+        class="close modal-close"
+        type="button"
+        data-dismiss="modal"
+        aria-hidden="true"
+      >
+        <span class="s7-close"></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card card-default pb-0 mb-0">
+        {% comment %}{{ registration_form.as_p }} {% endcomment %}
+        <div class="card-body">
+          <form
+            action="{% url 'register_technician' %}"
+            data-parsley-validate=""
+            novalidate=""
+            method="post"
+          >
+            {% csrf_token %}
+            <div class="form-group">
+              <label>First Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="first_name"
+                maxlength="60"
+                required=""
+                id="id_first_name"
+                parsley-trigger="change"
+                placeholder="Enter first name"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="last_name"
+                maxlength="60"
+                required=""
+                id="id_last_name"
+                parsley-trigger="change"
+                placeholder="Enter last name"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label>Email address</label>
+              <input
+                class="form-control"
+                type="email"
+                name="email"
+                maxlength="254"
+                required=""
+                id="id_email"
+                parsley-trigger="change"
+                placeholder="Enter email"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input
+                class="form-control"
+                name="phone_number"
+                maxlength="15"
+                required=""
+                id="id_phone_number"
+                placeholder="Enter phone number"
+              />
+            </div>
+            <!-- <div class="form-group">
+              <label>Speciality</label>
+              <select
+                class="form-control custom-select"
+                name="userRole"
+                id="id_userRole"
+              >
+                <option value="GeneralDoctor">General Doctor</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Gynecologist">Gynecologist</option>
+                <option value="Cardiologist">Cardiologist</option>
+              </select>
+            </div> -->
+            <!-- <div class="form-group ">
+              <label class="col-12 col-sm-3 col-form-label text-sm-right">Description</label>
+              <div class="col-12 col-sm-8 col-lg-6">
+                <textarea class="form-control"></textarea>
+              </div>
+            </div> -->
+            <div class="form-group">
+              <label>Password</label>
+              <input
+                class="form-control"
+                id="id_password1"
+                type="password"
+                name="password1"
+                required=""
+                placeholder="Password"
+                required=""
+              />
+            </div>
+            <div class="form-group">
+              <label>Repeat Password</label>
+              <input
+                class="form-control"
+                data-parsley-equalto="#id_password1"
+                type="password"
+                required=""
+                name="password2"
+                id="id_password2"
+                placeholder="Password"
+              />
+            </div>
+            <div class="row pt-0 pt-0 pt-lg-5">
+              <div class="col-lg-6 pb-4 pb-lg-0"></div>
+              <div class="col-lg-6">
+                <p class="text-right">
+                  <button class="btn btn-space btn-primary" type="submit">
+                    Submit
+                  </button>
+                  <button
+                    class="btn btn-sm btn-space btn-secondary modal-close"
+                    type="button"
+                    data-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

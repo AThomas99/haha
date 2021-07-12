@@ -1,0 +1,40 @@
+{% load static %}
+
+<div class="col-md-4">
+    <div class="user-info-list card card-default">
+        <div class="card-header card-header-divider">About DR. {{ doctor.first_name }}</div>
+        <div class="card-body">
+            <table class="no-border no-strip skills">
+                <tbody class="no-border-x no-border-y">
+                    <tr>
+                        <td class="icon"><span class="icon s7-portfolio"></span></td>
+                        <td class="item">Full Name</td>
+                        <td><a href="#"> {{doctor.first_name}} {{doctor.last_name}} </a></td>
+                    </tr>
+                    <tr>
+                        <td class="icon"><span class="icon s7-gift"></span></td>
+                        <td class="item">Joined</td>
+                        <td> <a href="#">{{doctor.date_joined}}</a></td>
+                    </tr>
+                    <tr>
+                        <td class="icon"><span class="icon s7-phone"></span></td>
+                        <td class="item">Mobile</td>
+                        <td> <a href="#">{{doctor.phone_number}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-header card-header-divider">SETTINGS</div>
+        <div class="card-body">
+            {% if doctor.is_active %}
+            <tr>
+                <a class="btn btn-space btn-danger" href="{% url 'disable_user' doctor.id %}">Deactivate</a>
+            </tr>
+            {% else %}
+            <tr>
+                <a class="btn btn-space btn-primary" href="{% url 'enable_user' doctor.id %}">Activate</a>
+            </tr>
+            {% endif %}
+        </div>
+    </div>
+</div>

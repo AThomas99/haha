@@ -7,10 +7,11 @@
     <div class="mai-wrapper mai-login">
         <div class="main-content container">
         <div class="splash-container row">
-            <div class="col-md-6 user-message"><span class="splash-message text-right">Hello!<br> welcome back</span> {% comment %}
-                <span class="alternative-message text-right">Don't have an account? <a href="{% url 'register_patient' %}">Sign Up</a></span>
-            {% endcomment %} </div>
-            <div class="col-md-6 form-message"><img class="logo-img mb-4" src="{% static 'assets/img/logo-2x.png' %}" alt="logo" width="169" height="28"><span class="splash-description text-center mt-5 mb-5">Login to your account</span>
+            <div class="col-md-6 user-message">
+                <h1 class="text-center">UNIVERSITY OF <br> DAR ES SALAAM</h1> 
+                <img class="logo-img" src="{% static 'assets/img/logo_ud.png' %}" alt="logo" style="max-height: 125px;">
+            </div>
+            <div class="col-md-6 form-message"><span class="splash-description text-center mt-5 mb-5">Login to your account</span>
             <form method="post" action="{% url 'login_user' %}"> 
                 {% csrf_token %}
                 <div class="form-group">
