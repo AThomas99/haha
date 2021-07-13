@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, reverse
 from django.conf import settings
 from django.contrib.auth import login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required, user_passes_test
-
+import xlwt
+from django.http import HttpResponse
 from app.forms import (
     PatientForm, 
     PatientEmergencyForm, 
@@ -326,4 +327,40 @@ def get_patient(request):
                 # 'media_url': settings.MEDIA_URL
             }
             return render(request, 'patient.html', context)
+        return redirect('/')
+
+
+@login_required(login_url='/')
+# @is_user_staff(login_url='/')
+def register_appointment(request):
+    form_data = AppointmentForm(request.POST)
+
+    if form_data.is_valid():
+        user = form_data.save(commit=False)
+        doctor = Account.users.get(id=form_data.data['doctor'])
+        user.doctor = doctor
+        user.save()
+
+    else:
+        print('Form is invalid')
+
+
+    return redirect(to='/appointment/list')
+
+@login_required(login_url='/')
+@is_user_staff(login_url='/')
+def get_appointment(request):
+        if request.user.is_reception:
+            appointment = Appointment.users.filter(id=id)
+            patient = Patient.users.filter(id=id)
+            doctor = Account.objects.all().filter(is_doctor=True)
+            context = {
+                'appointment': appointment,
+                'doctor': doctor,
+                'patient': patient,
+                'registration_form': AppointmentForm(),
+                'profile_page': False,
+                # 'media_url': settings.MEDIA_URL
+            }
+            return render(request, 'appointment.html', context)
         return redirect('/')
