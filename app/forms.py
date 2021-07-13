@@ -205,7 +205,6 @@ class AppointmentForm(forms.ModelForm):
             'doctor_assigned',
             'appointment_time',
             'created_on',
-            'note'
         )
 
 # Prescription form

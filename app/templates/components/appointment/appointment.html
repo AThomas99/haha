@@ -10,39 +10,24 @@
         </td>
         <td class="user-avatar cell-detail user-info">
             <img src="../../../../media/default/user.png" alt="Avatar">
-            <span>{{ patient.first_name }} {{ patient.last_name }}</span>
+            <span>{{ appointment.patient_requested }} </span>
             <span class="cell-detail-description">Patient</span>
         </td>
         <td class="cell-detail">
-            <span>{{ patient.phone_number }}</span>
-            <span class="cell-detail-description">{{ patient.email }}</span>
+            <span>{{ appointment.doctor_assigned }}</span>
+            <span class="cell-detail-description">Doctor</span>
         </td>
         <td class="cell-detail">
-            <span>{{ patient.gender }}</span>
+            <span>{{ appointment.phone_number }}</span>
             <span class="cell-detail-description">Age: {{ patient.age }}</span>
         </td>
         <td class="cell-detail">
-            <span>{{ patient.doctor }}</span>
-            <!-- <span class="cell-detail-description">{{ patient.doctor.first_name }}</span> -->
+            <span> {{ appointment.appointment_time }} </span>
+            <span class="cell-detail-description">{{ appointment.appointment_time }}</span>
         </td>
         <td class="cell-detail">
-            <span> {{ patient.registered.date }} </span>
-            <span class="cell-detail-description"> {{ patient.registered.time }} </span>
-        </td>
-          <td class="text-right">
-            <div class="btn-group dropup btn-hspace">
-                <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
-                    <span>More</span>
-                    <span class="icon-dropdown s7-angle-down"></span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    {% if patient.is_active %}
-                        <a class="dropdown-item" href="{% url 'disable_user' patient.id %}">Deactivate</a>
-                    {% else %}
-                        <a class="dropdown-item" href="{% url 'enable_user' patient.id %}">Activate</a>
-                    {% endif %}
-                </div>
-            </div>
+            <span> {{ appointment.created_on.date }} </span>
+            <span class="cell-detail-description">{{ appointment.created_on.date }}</span>
         </td>
     </tr>
 {% endfor %}

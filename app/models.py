@@ -286,7 +286,6 @@ class Appointment(models.Model):
     appointment_time = models.CharField(choices=APPOINTMENT_TIME, max_length=8)
     created_on = models.DateTimeField(default=timezone.now, blank=True)
     appointment_status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS, default='unassigned')
-    note = RichTextField()
 
     class Meta:
         verbose_name = "Appointment"

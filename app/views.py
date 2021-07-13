@@ -314,10 +314,9 @@ def register_patient(request):
     return redirect(to='/patient/list')
 
 @login_required(login_url='/')
-@is_user_staff(login_url='/')
 def get_patient(request):
         if request.user.is_reception:
-            patient = Patient.users.filter(id=id)
+            patient = Patient.objects.all()
             doctor = Account.objects.all().filter(is_doctor=True)
             context = {
                 'patient': patient,
@@ -338,6 +337,9 @@ def register_appointment(request):
     if form_data.is_valid():
         user = form_data.save(commit=False)
         doctor = Account.users.get(id=form_data.data['doctor'])
+        patient = Patient.objects.all(id=form_data.data['patient'])
+
+        user.patient = patient
         user.doctor = doctor
         user.save()
 
@@ -348,16 +350,14 @@ def register_appointment(request):
     return redirect(to='/appointment/list')
 
 @login_required(login_url='/')
-@is_user_staff(login_url='/')
 def get_appointment(request):
         if request.user.is_reception:
-            appointment = Appointment.users.filter(id=id)
-            patient = Patient.users.filter(id=id)
+            appointment = Appointment.objects.all()
             doctor = Account.objects.all().filter(is_doctor=True)
             context = {
                 'appointment': appointment,
                 'doctor': doctor,
-                'patient': patient,
+                # 'patient': patient,
                 'registration_form': AppointmentForm(),
                 'profile_page': False,
                 # 'media_url': settings.MEDIA_URL

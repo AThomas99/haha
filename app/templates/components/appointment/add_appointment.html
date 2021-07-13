@@ -94,8 +94,20 @@
                 name="doctor"
                 id="id_doctor"
               >
-                {% for doctor in doctors %}
-                  <option value="{{doctor.id}}">{{ doctor.first_name }} {{ doctor.last_name }}</option>
+                {% for doctor in doctor %}
+                  <option value="{{doctor.id}}"> {{ doctor.first_name }} {{ doctor.last_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <select
+                class="form-control custom-select"
+                name="patient"
+                id="id_patient"
+              >
+                {% for patient in patient %}
+                  <option value="{{patient.id}}"> {{ patient.first_name }} {{ patient.last_name }}</option>
                 {% endfor %}
               </select>
             </div>
