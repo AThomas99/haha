@@ -34,6 +34,7 @@ def home_for_receptionist(request):
         "patient_emergency_form": PatientEmergencyForm(),
         "patient": Patient.objects.all(),
         "all_patients": Patient.objects.filter(patient_status="Registered"),
+        "doctors": Account.users.filter(is_doctor=True),
         "status": "Registered"
     }
     return render(request, 'patient.html', context=context)
@@ -44,7 +45,7 @@ def home_for_nurse(request):
         "patient_vital_form": PatientVitalsForm(),
         "patient": Patient.objects.all(),
         "all_patients": Patient.objects.filter(patient_status="Registered"),
-        "status": "Registered"
+        "status": "Registered",
     }
     return render(request, 'nurse.html', context=context)
 
@@ -295,14 +296,20 @@ def technician_profile(request, id):
     return render(request, 'technician.html', context)
 
 @login_required(login_url='/')
-@is_user_staff(login_url='/')
+# @is_user_staff(login_url='/')
 def register_patient(request):
     form_data = PatientForm(request.POST)
+
     if form_data.is_valid():
         user = form_data.save(commit=False)
-        user.doctor = request.user
-
+        doctor = Account.users.get(id=form_data.data['doctor'])
+        user.doctor = doctor
         user.save()
+
+    else:
+        print('Form is invalid')
+
+
     return redirect(to='/patient/list')
 
 @login_required(login_url='/')

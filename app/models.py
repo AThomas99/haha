@@ -200,7 +200,7 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=50, blank=False, null=False)
     phone_number   = models.CharField(unique=True, max_length=15)
     gender = models.CharField(max_length=10, choices=GENDER, blank=False, null=False)
-    birth_date = models.DateField(auto_now=False, auto_now_add=False)
+    birth_date = models.DateField(auto_now=True)
     age = models.IntegerField(null=False, blank=False)
     address = models.CharField(max_length=200, blank=True, null=True)
     registered = models.DateTimeField(auto_now_add=True)

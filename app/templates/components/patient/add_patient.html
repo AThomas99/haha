@@ -23,6 +23,7 @@
             method="post"
           >
             {% csrf_token %}
+
             <div class="form-group">
               <label>First Name</label>
               <input
@@ -55,8 +56,8 @@
               <label>Gender</label>
               <select
                 class="form-control custom-select"
-                name="userRole"
-                id="id_userRole"
+                name="gender"
+                id="id_gender"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -70,6 +71,7 @@
                 maxlength="2"
                 required=""
                 id="id_age"
+                type="number"
                 placeholder="Enter Age"
               />
             </div>
@@ -84,15 +86,21 @@
                 placeholder="Enter phone number"
               />
             </div>
-            <!-- <div class="form-group">
+
+
+            <div class="form-group">
               <select
                 class="form-control custom-select"
-                name="userRole"
-                id="id_userRole"
+                name="doctor"
+                id="id_doctor"
               >
-                <option value="{{ patient.doctor }}">{{ patient.doctor }}</option>
+                {% for doctor in doctors %}
+                  <option value="{{doctor.id}}">{{ doctor.first_name }} {{ doctor.last_name }}</option>
+                {% endfor %}
               </select>
-            </div> -->
+            </div>
+
+
             <div class="row pt-0 pt-0 pt-lg-5">
               <div class="col-lg-6 pb-4 pb-lg-0"></div>
               <div class="col-lg-6">

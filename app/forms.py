@@ -152,8 +152,6 @@ class PatientForm(forms.ModelForm):
             'gender',
             'age',
             'phone_number',
-            'doctor',
-            'patient_status',
         )
 
 class PatientEmergencyForm(forms.ModelForm):

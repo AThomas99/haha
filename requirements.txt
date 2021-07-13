@@ -1,0 +1,8 @@
+anytree==2.8.0
+appdirs==1.4.4
+asn1crypto==1.4.0
+Beaker==1.11.0
+btrfsutil==5.12.1
+CacheControl==0.12.6
+cffi==1.14.5
+
