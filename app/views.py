@@ -327,4 +327,3 @@ def get_patient(request):
             }
             return render(request, 'patient.html', context)
         return redirect('/')
-

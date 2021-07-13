@@ -1,0 +1,127 @@
+{% load static %}
+
+
+<div class="modal-container modal-effect-1" id="nft-default">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button
+        class="close modal-close"
+        type="button"
+        data-dismiss="modal"
+        aria-hidden="true"
+      >
+        <span class="s7-close"></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card card-default pb-0 mb-0">
+        <div class="card-body">
+          <form
+            action="{% url 'register_appointment' %}"
+            data-parsley-validate=""
+            novalidate=""
+            method="post"
+          >
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label>First Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="first_name"
+                maxlength="60"
+                required=""
+                id="id_first_name"
+                parsley-trigger="change"
+                placeholder="Enter first name"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="last_name"
+                maxlength="60"
+                required=""
+                id="id_last_name"
+                parsley-trigger="change"
+                placeholder="Enter last name"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <select
+                class="form-control custom-select"
+                name="gender"
+                id="id_gender"
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Age</label>
+              <input
+                class="form-control"
+                name="age"
+                maxlength="2"
+                required=""
+                id="id_age"
+                type="number"
+                placeholder="Enter Age"
+              />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input
+                class="form-control"
+                name="phone_number"
+                maxlength="15"
+                required=""
+                id="id_phone_number"
+                placeholder="Enter phone number"
+              />
+            </div>
+
+
+            <div class="form-group">
+              <select
+                class="form-control custom-select"
+                name="doctor"
+                id="id_doctor"
+              >
+                {% for doctor in doctors %}
+                  <option value="{{doctor.id}}">{{ doctor.first_name }} {{ doctor.last_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+
+            <div class="row pt-0 pt-0 pt-lg-5">
+              <div class="col-lg-6 pb-4 pb-lg-0"></div>
+              <div class="col-lg-6">
+                <p class="text-right">
+                  <button class="btn btn-space btn-primary" type="submit">
+                    Submit
+                  </button>
+                  <button
+                    class="btn btn-sm btn-space btn-secondary modal-close"
+                    type="button"
+                    data-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

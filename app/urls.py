@@ -17,6 +17,11 @@ urlpatterns = [
     #path('technician/profile/<int:id>', views.technician_profile, name='technician_profile'),
     path('patient/list', views.get_patient, name='patient'),
     
+   # Appointment routes
+    path('register/appointment', views.register_appointment, name='register_appointment'),
+    #path('technician/profile/<int:id>', views.technician_profile, name='technician_profile'),
+    path('appointment/list', views.get_appointment, name='appointment'),
+    
     # Reception routes
     path('register/reception', views.register_reception, name='register_reception'),
     path('reception/profile/<int:id>', views.reception_profile, name='reception_profile'),

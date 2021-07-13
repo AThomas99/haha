@@ -1,0 +1,48 @@
+{% load static %}
+
+{% for appointment in appointment %}
+    <tr class="table-light">
+        <td>
+            <label class="custom-control custom-control-sm custom-checkbox">
+                <input class="custom-control-input" type="checkbox">
+                <span class="custom-control-label"></span>
+            </label>
+        </td>
+        <td class="user-avatar cell-detail user-info">
+            <img src="../../../../media/default/user.png" alt="Avatar">
+            <span>{{ patient.first_name }} {{ patient.last_name }}</span>
+            <span class="cell-detail-description">Patient</span>
+        </td>
+        <td class="cell-detail">
+            <span>{{ patient.phone_number }}</span>
+            <span class="cell-detail-description">{{ patient.email }}</span>
+        </td>
+        <td class="cell-detail">
+            <span>{{ patient.gender }}</span>
+            <span class="cell-detail-description">Age: {{ patient.age }}</span>
+        </td>
+        <td class="cell-detail">
+            <span>{{ patient.doctor }}</span>
+            <!-- <span class="cell-detail-description">{{ patient.doctor.first_name }}</span> -->
+        </td>
+        <td class="cell-detail">
+            <span> {{ patient.registered.date }} </span>
+            <span class="cell-detail-description"> {{ patient.registered.time }} </span>
+        </td>
+          <td class="text-right">
+            <div class="btn-group dropup btn-hspace">
+                <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span>More</span>
+                    <span class="icon-dropdown s7-angle-down"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    {% if patient.is_active %}
+                        <a class="dropdown-item" href="{% url 'disable_user' patient.id %}">Deactivate</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'enable_user' patient.id %}">Activate</a>
+                    {% endif %}
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endfor %}

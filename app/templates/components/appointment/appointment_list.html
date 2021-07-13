@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-default card-table">
+                <div class="card-header">Appointment Management
+                    <div class="tools">
+                        <button class="btn btn-sm btn-space btn-primary md-trigger" data-modal="nft-default">
+                            <i class="icon icon-left s7-add-user text-white mr-2"></i> Create Appointment
+                        </button>
+                        {% comment %} Add user modal {% endcomment %}
+                            {% include 'components/appointment/add_appointment.html' %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width:5%;">
+                                    <label class="custom-control custom-control-sm custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox"><span
+                                            class="custom-control-label"></span>
+                                    </label>
+                                </th>
+                                <th style="width:15%;">User</th>
+                                <th style="width:15%;">Contacts</th>
+                                <th style="width:15%;">Personal Info</th>
+                                <th style="width:15%;">Doctor assigned</th>
+                                <th style="width:15%;">Date Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% comment %} Single user component {% endcomment %}
+                            {% include 'components/appointment/appointment.html' %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
